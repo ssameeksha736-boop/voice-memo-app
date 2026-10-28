@@ -1,0 +1,53 @@
+HOW TO RUN - Voice Memo App (transcription & auto-summary) - primary build
+==========================================================================
+Stack: Plain PHP (custom MVC, no framework), MySQL/MariaDB.
+Folder: voice-memo-app
+Suite dev-server port convention: 8014
+
+This suite now runs on XAMPP (Apache + MySQL/MariaDB) as the standard local
+environment. MySQL listens on XAMPP's own default port 3306 - no port
+changes needed on a standard install.
+
+STEP 1 - Install XAMPP (skip if it's already installed)
+--------------------------------------------------------------------------
+1. Download XAMPP with PHP 8.1+ from https://www.apachefriends.org
+   (default install path C:\xampp).
+2. Open the XAMPP Control Panel and start Apache and MySQL.
+3. Add C:\xampp\php and C:\xampp\mysql\bin to your system PATH, then
+   confirm with `php -v` and `mysql --version` in a new terminal.
+
+MySQL runs on the default port 3306 out of the box - no my.ini changes
+needed unless something else on your machine already owns that port.
+
+STEP 2 - Import the databasemysql -u root -P 3306 < database/schema.sql
+--------------------------------------------------------------------------
+From this project's folder:
+
+    
+
+(adjust -P to 3306, or drop -P entirely, if your MySQL runs on the default
+port). This creates the `voice_memo_app` database, tables, and demo seed data. Safe
+to re-run any time to reset the data.
+
+STEP 3 - Start the app
+--------------------------------------------------------------------------
+Make sure MySQL/MariaDB is running first, then from this project's folder:
+
+    php -S localhost:8014 -t public public/index.php
+
+The `-t public` is required - without it, static assets under public/assets
+will 404 even though the HTML still renders.
+
+STEP 4 - Open it
+--------------------------------------------------------------------------
+Visit:
+
+    http://localhost:8014/index.php?route=login
+    (or just http://localhost:8014/ - it redirects to login)
+
+Sign in with any of the demo credentials listed in this project's own
+README.md, under the "Default login credentials" / "Demo credentials" section.
+
+STEP 5 - Stop the app
+--------------------------------------------------------------------------
+Press Ctrl+C in the terminal running the `php -S` command.
